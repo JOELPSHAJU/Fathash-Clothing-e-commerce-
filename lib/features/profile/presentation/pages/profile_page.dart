@@ -626,9 +626,9 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
 
       case 'HELP CENTER':
         return [
-          _sidebarDisplayItem('Email Support', 'info@fathash.com', fg, fgMuted),
-          _sidebarDisplayItem('WhatsApp', '+91 80782 56341', fg, fgMuted),
-          _sidebarDisplayItem('Instagram', '@fathash_by_hibaashir', fg, fgMuted),
+          _sidebarDisplayItem('Email Support', 'support@buyora.com', fg, fgMuted),
+          _sidebarDisplayItem('WhatsApp', '+91 98765 43210', fg, fgMuted),
+          _sidebarDisplayItem('Instagram', '@buyora_by_joel', fg, fgMuted),
           _sidebarDisplayItem(
               'Store Hours', 'Mon - Sat: 10:00 - 19:00', fg, fgMuted),
           const SizedBox(height: 48),
@@ -691,7 +691,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
         return [
           _sidebarDisplayItem(
               'Current Method', 'UPI Payment (Active)', fg, fgMuted),
-          _sidebarDisplayItem('UPI ID', 'hibaashir@upi', fg, fgMuted),
+          _sidebarDisplayItem('UPI ID', 'joel@upi', fg, fgMuted),
           const SizedBox(height: 48),
           _actionButton('CHANGE METHOD', fg, bg, onTap: () {}),
         ];

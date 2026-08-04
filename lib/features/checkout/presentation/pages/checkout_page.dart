@@ -190,13 +190,25 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
                           width: 80,
                           height: 110,
                           color: cardBg,
-                          child: Center(
-                            child: Icon(
-                              CupertinoIcons.scissors,
-                              color: fgMuted,
-                              size: 24,
-                            ),
-                          ),
+                          child: product.imageAsset != null
+                              ? Image.asset(
+                                  product.imageAsset!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (ctx, err, st) => Center(
+                                    child: Icon(
+                                      CupertinoIcons.photo,
+                                      color: fgMuted,
+                                      size: 24,
+                                    ),
+                                  ),
+                                )
+                              : Center(
+                                  child: Icon(
+                                    CupertinoIcons.photo,
+                                    color: fgMuted,
+                                    size: 24,
+                                  ),
+                                ),
                         ),
                         const SizedBox(width: 24),
                         Expanded(
@@ -348,14 +360,14 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
                   color: Colors.white,
                   child: QrImageView(
                     data:
-                        'upi://pay?pa=hibaashir@upi&pn=FATHASH&am=$price&cu=INR&mode=02',
+                        'upi://pay?pa=joel@upi&pn=BUYORA&am=$price&cu=INR&mode=02',
                     version: QrVersions.auto,
                     size: 220.0,
                   ),
                 ),
                 const SizedBox(height: 32),
                 Text(
-                  'FATHASH BY HIBAASHIR',
+                  'BUYORA BY JOEL',
                   style: TextStyle(
                     color: fg,
                     fontSize: 10,
@@ -370,7 +382,7 @@ class _CheckoutPageState extends ConsumerState<CheckoutPage> {
                   child: ElevatedButton(
                     onPressed: () async {
                       final upiUrl = Uri.parse(
-                        'upi://pay?pa=hibaashir@upi&pn=FATHASH&am=$price&cu=INR',
+                        'upi://pay?pa=joel@upi&pn=BUYORA&am=$price&cu=INR',
                       );
                       if (await canLaunchUrl(upiUrl)) {
                         await launchUrl(upiUrl);

@@ -6,6 +6,7 @@ class Product {
   final String category;
   final String brand;
   final String? imageAsset;
+  final List<String>? galleryImages;
   final bool isArchived;
   final String? collectionId;
 
@@ -17,6 +18,7 @@ class Product {
     required this.category,
     required this.brand,
     this.imageAsset,
+    this.galleryImages,
     this.isArchived = false,
     this.collectionId,
   });

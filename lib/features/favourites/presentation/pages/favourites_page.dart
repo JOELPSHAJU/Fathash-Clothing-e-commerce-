@@ -188,7 +188,7 @@ class FavouritesPage extends ConsumerWidget {
                     fit: BoxFit.cover,
                     errorBuilder: (ctx, err, st) => Center(
                       child: Icon(
-                        CupertinoIcons.scissors,
+                        CupertinoIcons.photo,
                         color: fgMuted,
                         size: 32,
                       ),
@@ -197,7 +197,7 @@ class FavouritesPage extends ConsumerWidget {
                 else
                   Center(
                     child: Icon(
-                      CupertinoIcons.scissors,
+                      CupertinoIcons.photo,
                       color: fgMuted,
                       size: 32,
                     ),

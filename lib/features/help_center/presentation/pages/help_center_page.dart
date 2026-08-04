@@ -38,7 +38,7 @@ class _HelpCenterPageState extends State<HelpCenterPage> {
 
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'info@fathash.com',
+      path: 'support@buyora.com',
       query: encodeQueryParameters(<String, String>{
         'subject': subject,
         'body': body,

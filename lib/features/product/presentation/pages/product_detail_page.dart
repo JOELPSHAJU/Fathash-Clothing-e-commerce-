@@ -158,7 +158,7 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
                             flex: 6,
                             child: Column(
                               children: [
-                                _buildImageGallery(cardBg, fgMuted),
+                                _buildImageGallery(product, cardBg, fgMuted),
                                 const SizedBox(height: 56),
                                 _buildDetailsAccordionSection(
                                   fg,
@@ -188,7 +188,7 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildImageGallery(cardBg, fgMuted),
+                          _buildImageGallery(product, cardBg, fgMuted),
                           const SizedBox(height: 48),
                           _buildPurchaseInfo(
                             context,
@@ -232,25 +232,95 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
     );
   }
 
-  Widget _buildImageGallery(Color cardBg, Color fgMuted) {
-    return GridView.count(
+  Widget _buildImageGallery(Product product, Color cardBg, Color fgMuted) {
+    final images =
+        product.galleryImages ??
+        [
+          product.imageAsset ?? 'assets/images/dress_navy_01.webp',
+          'assets/images/dress_cobalt_02.webp',
+          'assets/images/swtsolhdovs-01-bldblu-AS_1.webp',
+          'assets/images/navy_2.webp',
+        ];
+
+    return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      crossAxisCount: 2,
-      mainAxisSpacing: 12,
-      crossAxisSpacing: 12,
-      childAspectRatio: 0.8,
-      children: List.generate(
-        4,
-        (index) => Container(
-          color: cardBg,
-          child: Stack(
-            children: [
-              Center(
-                child: Icon(CupertinoIcons.scissors, color: fgMuted, size: 40),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 12,
+        crossAxisSpacing: 12,
+        childAspectRatio: 0.8,
+      ),
+      itemCount: 4,
+      itemBuilder: (context, index) {
+        final imgPath = index < images.length ? images[index] : images.first;
+        return GestureDetector(
+          onTap: () => _openImageLightbox(context, imgPath),
+          child: Container(
+            color: cardBg,
+            child: ClipRRect(
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Image.asset(
+                    imgPath,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Center(
+                        child: Icon(
+                          CupertinoIcons.photo,
+                          color: fgMuted,
+                          size: 32,
+                        ),
+                      );
+                    },
+                  ),
+                  Positioned(
+                    bottom: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        CupertinoIcons.zoom_in,
+                        color: Colors.white,
+                        size: 14,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
+        );
+      },
+    );
+  }
+
+  void _openImageLightbox(BuildContext context, String currentImg) {
+    showDialog(
+      context: context,
+      builder: (context) => Dialog.fullscreen(
+        backgroundColor: Colors.black.withValues(alpha: 0.92),
+        child: Stack(
+          children: [
+            Center(child: Image.asset(currentImg, fit: BoxFit.contain)),
+            Positioned(
+              top: 24,
+              right: 24,
+              child: IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: const Icon(
+                  CupertinoIcons.xmark,
+                  color: Colors.white,
+                  size: 28,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -739,39 +809,53 @@ class _ProductDetailPageState extends ConsumerState<ProductDetailPage> {
             itemCount: similar.length,
             itemBuilder: (context, index) {
               final p = similar[index];
-              return Container(
-                width: 280,
-                margin: const EdgeInsets.only(right: 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 350,
-                      color: cardBg,
-                      child: Center(
-                        child: Icon(
-                          CupertinoIcons.scissors,
-                          color: fgMuted,
-                          size: 40,
+              final imgAsset =
+                  p.imageAsset ?? 'assets/images/dress_navy_01.webp';
+              return GestureDetector(
+                onTap: () => context.push('/product/${p.id}'),
+                child: Container(
+                  width: 280,
+                  margin: const EdgeInsets.only(right: 24),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 350,
+                        width: 280,
+                        color: cardBg,
+                        child: ClipRRect(
+                          child: Image.asset(
+                            imgAsset,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Center(
+                                child: Icon(
+                                  CupertinoIcons.photo,
+                                  color: fgMuted,
+                                  size: 40,
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      p.name.toUpperCase(),
-                      style: TextStyle(
-                        color: fg,
-                        fontSize: 11,
-                        letterSpacing: 2,
-                        fontWeight: FontWeight.bold,
+                      const SizedBox(height: 16),
+                      Text(
+                        p.name.toUpperCase(),
+                        style: TextStyle(
+                          color: fg,
+                          fontSize: 11,
+                          letterSpacing: 2,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '\$${p.price.toStringAsFixed(0)}',
-                      style: TextStyle(color: fgMuted, fontSize: 12),
-                    ),
-                  ],
+                      const SizedBox(height: 4),
+                      Text(
+                        '\$${p.price.toStringAsFixed(0)}',
+                        style: TextStyle(color: fgMuted, fontSize: 12),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

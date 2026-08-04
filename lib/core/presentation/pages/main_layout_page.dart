@@ -112,7 +112,7 @@ class MainLayoutPage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'F A T H A S H',
+                        'B U Y O R A',
                         style: TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: isDesktop ? 22 : 18,
@@ -122,7 +122,7 @@ class MainLayoutPage extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        'BY HIBAASHIR',
+                        'BY JOEL',
                         style: TextStyle(
                           fontSize: 7,
                           letterSpacing: 4,

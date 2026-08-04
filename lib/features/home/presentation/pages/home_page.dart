@@ -59,7 +59,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _sectionLabel(context, 'FATHASH COLLECTIONS'),
+                  _sectionLabel(context, 'BUYORA COLLECTIONS'),
                   const SizedBox(height: 16),
                   Text(
                     'Must-Have Styles',
@@ -486,7 +486,7 @@ class _HomePageState extends ConsumerState<HomePage> {
       child: Column(
         children: [
           Text(
-            'JOIN THE WORLD OF FATHASH',
+            'JOIN THE WORLD OF BUYORA',
             style: TextStyle(
               color: fg,
               fontSize: 12,
@@ -539,7 +539,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   backgroundColor: bg,
                                   shape: const ContinuousRectangleBorder(),
                                   title: Text(
-                                    'WELCOME TO FATHASH',
+                                    'WELCOME TO BUYORA',
                                     style: TextStyle(
                                       color: fg,
                                       fontSize: 14,
@@ -679,7 +679,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'F A T H A S H',
+              'B U Y O R A',
               style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 color: fg,
                 fontSize: 36,
@@ -688,7 +688,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             ),
             const SizedBox(height: 8),
             Text(
-              'BY HIBAASHIR',
+              'BY JOEL',
               style: TextStyle(
                 color: AppColors.secondary,
                 fontSize: 10,

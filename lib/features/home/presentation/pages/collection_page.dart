@@ -99,7 +99,7 @@ class CollectionPage extends ConsumerWidget {
             icon: Icon(Icons.arrow_back_ios_new, size: 20, color: fg),
           ),
           Text(
-            'F A T H A S H',
+            'B U Y O R A',
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
               fontSize: 24,
               letterSpacing: 8,

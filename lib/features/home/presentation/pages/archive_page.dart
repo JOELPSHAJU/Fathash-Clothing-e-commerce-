@@ -47,7 +47,7 @@ class ArchivePage extends ConsumerWidget {
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 600),
                     child: Text(
-                      'Explore our curated archive of past collections. These showpieces represent the evolution of FATHASH, now available at exclusive price adjustments.',
+                      'Explore our curated archive of past collections. These showpieces represent the evolution of Buyora, now available at exclusive price adjustments.',
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         height: 1.8,
                         color: fgMuted,
@@ -112,7 +112,7 @@ class ArchivePage extends ConsumerWidget {
             icon: Icon(Icons.arrow_back_ios_new, size: 20, color: fg),
           ),
           Text(
-            'F A T H A S H',
+            'B U Y O R A',
             style: Theme.of(context).textTheme.displayLarge?.copyWith(
               fontSize: 24,
               letterSpacing: 8,

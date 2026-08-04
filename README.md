@@ -1,6 +1,6 @@
-# shopping
+# Buyora by Joel
 
-A new Flutter project.
+A modern luxury e-commerce web and mobile application.
 
 ## Getting Started
 

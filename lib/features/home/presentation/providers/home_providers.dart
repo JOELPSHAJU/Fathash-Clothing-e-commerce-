@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../product/domain/product.dart';
 import '../../domain/home_banner.dart';
 
-// FATHASH Product Catalog — Ladies Modest Wear
+// Buyora Product Catalog — Ladies Modest Wear
 final List<Product> mockProducts = [
   // ── COTTON SET ────────────────────────────────────────────────────────────
   _m(
@@ -517,9 +517,19 @@ Product _m(
   String cat,
   String brand,
   String asset, {
+  List<String>? galleryImages,
   bool isArchived = false,
   String? collectionId,
 }) {
+  final mainImage = 'assets/images/$asset';
+  
+  final defaultGallery = [
+    mainImage,
+    'assets/images/dress_cobalt_02.webp',
+    'assets/images/swtsolhdovs-01-bldblu-AS_1.webp',
+    'assets/images/navy_2.webp',
+  ];
+
   return Product(
     id: id,
     name: name,
@@ -527,7 +537,8 @@ Product _m(
     rating: 4.5 + (id.length % 5) * 0.1,
     category: cat,
     brand: brand,
-    imageAsset: 'assets/images/$asset',
+    imageAsset: mainImage,
+    galleryImages: galleryImages ?? defaultGallery,
     isArchived: isArchived,
     collectionId: collectionId,
   );
