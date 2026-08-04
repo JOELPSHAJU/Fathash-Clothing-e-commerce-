@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/theme_provider.dart';
+import '../../utils/fullscreen_helper.dart';
 
 class MainLayoutPage extends ConsumerWidget {
   const MainLayoutPage({super.key, required this.navigationShell});
@@ -21,6 +22,7 @@ class MainLayoutPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final isDesktop = MediaQuery.of(context).size.width > 800;
     final themeMode = ref.watch(themeModeProvider);
+    final isFullScreen = ref.watch(isFullScreenProvider);
     final isDark = themeMode == ThemeMode.dark;
 
     // Adaptive colors based on theme
@@ -32,7 +34,7 @@ class MainLayoutPage extends ConsumerWidget {
       backgroundColor: bg,
       body: Column(
         children: [
-          _buildHeader(context, ref, isDesktop, isDark, bg, fg, fgMuted),
+          _buildHeader(context, ref, isDesktop, isDark, isFullScreen, bg, fg, fgMuted),
           Expanded(child: navigationShell),
         ],
       ),
@@ -78,6 +80,7 @@ class MainLayoutPage extends ConsumerWidget {
     WidgetRef ref,
     bool isDesktop,
     bool isDark,
+    bool isFullScreen,
     Color bg,
     Color fg,
     Color fgMuted,
@@ -200,6 +203,25 @@ class MainLayoutPage extends ConsumerWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(width: 28),
+                      // ── FULLSCREEN TOGGLE ──
+                      Tooltip(
+                        message: isFullScreen ? 'Exit Full Screen' : 'Full Screen Mode',
+                        child: GestureDetector(
+                          onTap: () {
+                            FullScreenHelper.toggle();
+                            ref.read(isFullScreenProvider.notifier).state =
+                                !isFullScreen;
+                          },
+                          child: Icon(
+                            isFullScreen
+                                ? CupertinoIcons.fullscreen_exit
+                                : CupertinoIcons.fullscreen,
+                            size: 20,
+                            color: fgMuted,
+                          ),
+                        ),
+                      ),
                     ],
                   )
                 else
@@ -213,7 +235,7 @@ class MainLayoutPage extends ConsumerWidget {
                               : ThemeMode.dark;
                         },
                         child: Padding(
-                          padding: const EdgeInsets.only(right: 20),
+                          padding: const EdgeInsets.only(right: 16),
                           child: AnimatedSwitcher(
                             duration: const Duration(milliseconds: 300),
                             child: Icon(
@@ -224,6 +246,24 @@ class MainLayoutPage extends ConsumerWidget {
                               size: 22,
                               color: fgMuted,
                             ),
+                          ),
+                        ),
+                      ),
+                      // Mobile fullscreen toggle
+                      GestureDetector(
+                        onTap: () {
+                          FullScreenHelper.toggle();
+                          ref.read(isFullScreenProvider.notifier).state =
+                              !isFullScreen;
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: Icon(
+                            isFullScreen
+                                ? CupertinoIcons.fullscreen_exit
+                                : CupertinoIcons.fullscreen,
+                            size: 20,
+                            color: fgMuted,
                           ),
                         ),
                       ),

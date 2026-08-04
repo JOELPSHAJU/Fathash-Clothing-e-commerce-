@@ -30,10 +30,8 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     final selectedCategory = ref.watch(selectedCategoryProvider);
     final products = ref.watch(filteredProductsProvider);
-    final favorites = ref.watch(favoritesProvider);
-    final favoriteProducts = mockProducts
-        .where((p) => favorites.contains(p.id))
-        .toList();
+
+
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final bg = Theme.of(context).scaffoldBackgroundColor;
